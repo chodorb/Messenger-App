@@ -1,0 +1,38 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/static/styles/homepage.css">
+    <title>
+        Chat Application
+    </title>
+</head>
+<body>
+<br>
+    <div id = 'formlogin'>
+    <form action='/chat' autocomplete="off">
+        
+        <div>
+            <label>Enter Username:</label>
+            <input type="text" name="username">
+        </div>
+        
+        <div>
+            <label>Enter room id:</label>
+            <input type="number" value="1" min="1" max="20" name="room">
+        </div>
+        <br>
+        
+        
+        <button type ="submit">Join!</button>
+    </form>
+  
+        <div id = 'quote'>
+        <p>"{{ quote }}"</p>
+        <p>-{{ author }}</p>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div id='online_users'> Users Online : {{ number }}</div>
+    
+</body>
+</html>

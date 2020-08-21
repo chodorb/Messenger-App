@@ -1,0 +1,50 @@
+
+#formlogin{
+position: relative;
+border: 1px solid black;
+width:50%;
+height: 75%;
+font-size: 40px;
+margin: 0 auto;
+text-align: center;
+
+font-family: fantasy;
+background-color: white;
+
+}
+body{ background-image: url('/static/img/gold.jpg');}
+#quote{
+font-size: 20px;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+position: absolute; 
+bottom:0%;
+width: 100%;
+}
+#online_users{
+    position: relative;
+    border: 1px solid black;
+    width:50%;
+    height: 8%;
+    
+    margin: 0 auto;
+    text-align: center;
+    font-size: 30;
+    font-family: fantasy;
+    background-color: white;
+
+
+}
+input{
+    width: 80%;
+   
+    text-align: center;
+    height: 40px;
+    font-size: 20;
+}
+button{
+    height: 45;
+    width: 20%;
+   
+
+
+}

@@ -1,0 +1,96 @@
+<html>
+
+    <head>
+
+        <title>
+            Chat Room {{room}}
+        </title>
+    </head>
+    <body>
+        <div id='container'>
+        <h1>Welcome to chat room {{room}}</h1>
+        <div id="messeges"> </div>
+        <form id ="messege_input_form">
+          <input id ="messege_input" type="text" name="messege" placeholder="Enter Messege">
+                <button type="submit">Send</button></div>
+                
+                
+            </form>
+           
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+	const socket = io.connect("127.0.0.1:5000")
+socket.on('connect', function () {
+    socket.emit('join_room',{
+        username: "{{ username }}",
+        room: "{{ room }}"
+
+
+    });
+    let message_input = document.getElementById('messege_input'); 
+    document.getElementById('messege_input_form').onsubmit = function (e) {
+    e.preventDefault();
+    let message = message_input.value.trim();
+    if (message.length) {
+        socket.emit('send_message', {
+            username: "{{ username }}",
+            room: "{{ room }}",
+            message: message
+        })
+    }
+    message_input.value = '';
+    message_input.focus();
+}     
+    
+   
+    socket.on('join_room_announcement',function(data){
+        console.log(data);
+        
+            const newNode = document.createElement('div');
+            newNode.innerHTML = `<b>${data.username}</b> has joined room ${data.room}`;
+            document.getElementById('messeges').appendChild(newNode);
+        
+    });
+
+    window.onunload =function(e) {
+        e.preventDefault;
+        
+        socket.emit('leave_room',{
+            username: "{{ username }}",
+            room: "{{ room }}"
+    })
+    return null;
+    };
+    
+
+
+    socket.on('receive_selfmessage',function(data)
+    {
+        console.log(data);
+        const newNode = document.createElement('div');
+        newNode.innerHTML = `<b>${data.username}:</b> &nbsp ${data.message} asdsadssdasdasda`;
+        document.getElementById('selfmesseges').appendChild(newNode);
+
+
+    });
+
+    socket.on('receive_message',function(data){
+        console.log(data);
+        const newNode = document.createElement('div');
+        newNode.innerHTML = `<b>${data.username}:</b> &nbsp ${data.message}`;
+        document.getElementById('messeges').appendChild(newNode);
+
+
+    });
+
+    socket.on('leave_room_announcement', function (data) {
+console.log(data);
+const newNode = document.createElement('div');
+newNode.innerHTML = `<b>${data.username}</b> has left room ${data.room}`;
+document.getElementById('messages').appendChild(newNode);
+    });
+
+});
+	</script>
+</html>
